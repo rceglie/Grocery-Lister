@@ -1,4 +1,5 @@
 import psycopg2 as ps
+import requests 
 
 conn = ps.connect(database = 'hackncdb', host = 'localhost', user = 'postgres', password = '1234', port = '1234')
 cursor = conn.cursor()
@@ -32,4 +33,57 @@ cursor = conn.cursor()
 #     quantity int NOT NULL,
 #     Primary Key(uid, pid)
 # )''')
+
+# cursor.execute("ALTER TABLE stores ALTER COLUMN lat DE(10,6)")
+# cursor.execute("ALTER TABLE stores ALTER COLUMN lon FLOAT(10,6)")
+# conn.commit()
+
+# cursor.execute("SELECT id, address from stores")
+# storeLocations = cursor.fetchall()
+# for store in storeLocations:
+#     sid = store[0]
+#     storeLocation = store[1]
+#     address = storeLocation.split(",")[0].replace(" ", "%20")
+#     city = storeLocation.split(",")[1].replace(" ", "%20")
+#     state = storeLocation.split(",")[2].replace(" ", "%20")
+#     url = "https://api.geoapify.com/v1/geocode/search?text=" \
+#         + address + "%2C%20" \
+#         + city + "%2C%20" \
+#         + state + "%2C%20United%20States%20of%20America&lang=en&limit=1&type=amenity&format=json&apiKey=1922d388abac4d2cbf326b05e1ec5449"
+#     response = requests.get(url)
+#     lon = response.json()["results"][0]["lon"]
+#     lat = response.json()["results"][0]["lat"]
+#     cursor.execute("UPDATE stores SET lon = %s, lat = %s WHERE id = %s", (lon, lat, sid))
+#     conn.commit()
+
+
+#cursor.execute("ALTER TABLE users ADD COLUMN lat DECIMAL(8,6)")
+# cursor.execute("ALTER TABLE users ADD COLUMN lon DECIMAL(9,6)")
+# conn.commit()
+
+
+
+# cursor.execute("SELECT id, address from users")
+# userLocations = cursor.fetchall()
+# for user in userLocations:
+#     uid = user[0]
+#     userLocation = user[1]
+#     address = userLocation.split(",")[0].replace(" ", "%20")
+#     city = userLocation.split(",")[1].replace(" ", "%20")
+#     state = userLocation.split(",")[2].replace(" ", "%20")
+#     url = "https://api.geoapify.com/v1/geocode/search?text=" \
+#         + address + "%2C%20" \
+#         + city + "%2C%20" \
+#         + state + "%2C%20United%20States%20of%20America&lang=en&limit=1&type=amenity&format=json&apiKey=599b81f19a8f4b068dfaa53b90a5be85"
+#     response = requests.get(url)
+#     lon = response.json()["results"][0]["lon"]
+#     lat = response.json()["results"][0]["lat"]
+#     cursor.execute("UPDATE users SET lon = %s, lat = %s WHERE id = %s", (lon, lat, uid))
+#     conn.commit()
+
+
+# cursor.execute("SELECT * FROM users")
+# print(cursor.fetchall())
+
+
 

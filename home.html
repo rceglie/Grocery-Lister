@@ -1,3 +1,58 @@
-<p>
-    hi
-</p>
+<head>
+    <link rel="stylesheet" href="client/src/style/home.css">
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1>name</h1>
+            <a href="#list" class="w3-bar-item w3-button">My Shopping List</a>
+        </div>
+    </header>
+
+<div class="flex-container">
+    <div1 class="filter-container">
+        <h3>Filter Search Results</h3>
+        <h4>Store:</h4>
+        <input type="checkbox" id="store0" name="store0" value="Aldi">
+        <label for="store0">Aldi</label><br>
+        <input type="checkbox" id="store1" name="store1" value="Harris Teeter">
+        <label for="store1">Harris Teeter</label><br>
+        <input type="checkbox" id="store3" name="store3" value="Trader Joe's">
+        <label for="store3">Trader Joe's</label><br>
+        <input type="checkbox" id="store4" name="store4" value="Wegmans">
+        <label for="store4">Wegmans</label><br>
+        <input type="checkbox" id="store5" name="store5" value="Walmart">
+        <label for="store5">Walmart</label><br>
+    
+        <h4>Distance:</h4>
+        <distLabels>5 10 15 20</distLabels>
+        <div3 class="slidecontainer">
+            <input type="range" min="5" max="20" value="5" step="5" class="slider" id="myRange">
+          </div3>
+    
+        <button>Filter</button>
+    </div1>
+
+    <div2 class="container">
+        <form action="" class = "search-bar"> 
+            <input type="text" id="query" name="q" placeholder="Search for a product">
+            <button type = "submit"><img src = 'images/search.png'></button>
+        </form>
+
+        <div class="itemresult">
+            <h3>whole wheat bread</h3>
+            <p>Store: Harris Teeter</p>
+            <p>Price: $1.99</p>
+        </div>
+
+        <div class="itemresult">
+            <h3>white bread</h3>
+            <p>Store: Trader Joe's</p>
+            <p>Price: $2.99</p>
+        </div>
+    </div2>
+</div>
+   
+</body>
+

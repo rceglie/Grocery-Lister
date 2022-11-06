@@ -1,0 +1,46 @@
+#body {font-family: 'Trebuchet MS', sans-serif;}
+
+.result {
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.399);
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+}
+.user-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+}
+
+.itemInfo {
+    width: 75%;
+}
+.itemPic {
+    padding: 0 30px 0 30px;
+    max-height: 200px;
+    max-width: 200px;
+    position: left;
+}
+
+.storeName {
+    color: rgba(0, 128, 0, 0.512);
+}
+
+.btn {
+    width: 100px;
+    height: 60px;
+    background: rgba(1, 10, 1, 0.074);
+    border: 0;
+    text-decoration-color: rgba(0, 0, 0, 0.391);
+    border-color: white;
+    opacity: 0.5;
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+.btn:hover {
+    opacity: 1;
+    background-color: rgba(44, 108, 72, 0.521);
+    color: black;
+}

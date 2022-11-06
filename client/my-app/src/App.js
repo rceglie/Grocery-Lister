@@ -7,17 +7,23 @@ import Home from './components/Home';
 import ChangePassword from './components/ChangePassword';
 import DeleteAccount from './components/DeleteAccount';
 import ChangeLocation from './components/ChangeLocation';
+import List from './components/List';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 const App = () => {
   return (
       <BrowserRouter>
           <Routes>
-              <Route path="/" exact element={<Navigate to="/user" />} />
+              <Route path="/" exact element={<Navigate to="/home" />} />
               <Route path="/user" exact element={<User/>} />
               <Route path="/home" exact element={<Home/>} />
               <Route path="/changePassword" exact element={<ChangePassword/>} />
               <Route path="/deleteAccount" exact element={<DeleteAccount/>} />
               <Route path="/changeLocation" exact element={<ChangeLocation/>} />
+              <Route path="/list" exact element={<List/>} />
+              <Route path="/signin" exact element={<SignIn/>} />
+              <Route path="/signup" exact element={<SignUp/>} />
           </Routes>
       </BrowserRouter>
   )

@@ -1,0 +1,156 @@
+#body {font-family: 'Trebuchet MS', sans-serif;}
+
+header {  
+  padding: 20px 0 70px 0px;
+  width: 100%;
+  height: 25px;
+  margin-top: 0%;
+  position: sticky;
+  top: 0;
+  background: url(../../public/images/foodpatterns.jpeg) 50%;
+  background-image: url(../../public/images/foodpatterns.jpeg);
+  background-repeat: repeat, repeat, repeat, no-repeat;
+  text-align: left;
+  text-indent: 35px;;
+  display: flex;
+  flex-direction: row;
+
+ }
+
+.siteName {
+  width: 35%;
+  position: left;
+  align-content: left;
+}
+
+.shopList {
+  width:10%;
+  position: right;
+}
+ .filter-container {
+  width: 25%;
+  padding: 0px 0px 0px 30px;
+ }
+
+ .distLabels {
+  display:flex;
+  flex-direction: row;
+  font-size: 9pt;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.slidecontainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%; /* Width of the outside container */
+  align-items: center;
+}
+
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 110%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #04AA6D; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 22em; /* Set a specific slider handle width */
+  height: 22em; /* Slider handle height */
+  background: #67dab06a; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.container {
+  width: 75%;
+  padding: 25px 50px;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+}
+
+.search-bar {
+  height: 40px;
+  width: 100%;
+  max-width: 750px;
+  background: rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  border-radius: 60px;
+  padding: 5px 10px 5px 10px;
+}
+
+.search-bar input {
+  background: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 12px 10px;
+  font-size: 16px;
+  border-radius: 60px;
+  color: rgba(0, 0, 0, 0.391);
+}
+::placeholder{
+  color: rgba(0, 0, 0, 0.391);
+}
+
+.search-bar button img{
+  width: 25px;
+}
+
+.search-bar button {
+  border: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: rgba(13, 110, 13, 0.671);
+  cursor: pointer;
+}
+
+.flex-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+
+.filterBtn {
+    width: 100%;
+    height: 20px;
+    background: rgba(1, 10, 1, 0.074);
+    border: 0;
+    text-decoration-color: rgba(0, 0, 0, 0.391);
+    border-color: white;
+    opacity: 0.5;
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+.filterBtn:hover {
+    opacity: 1;
+    background-color: rgba(44, 108, 72, 0.521);
+    color: black;
+}

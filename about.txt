@@ -2,3 +2,8 @@ hi robbie hi donovan
 
 durham walmart
 university place ht
+
+- signin endpoint
+- signup endpoint
+- set location endpoint
+- set location page
