@@ -25,8 +25,14 @@ cursor = conn.cursor()
 
 # conn.commit()
 
-x = requests.post('http://127.0.0.1:5000/searchquerylowest', json = {"query": "apple", 'exclude' : ['Walmart', "Trader Joe's"], 'uid': 2, 'maxDistance': 5})
-print(x.text)
+# cursor.execute('SELECT * FROM users')
+# print(cursor.fetchall())
+
+# x = requests.post('http://127.0.0.1:5000/change_address', json = {'street': '1723 Fordham Blvd', 'city': 'Chapel Hill', 'state':'NC 27541', 'uid': 4})
+# print(x.text)
+
+# cursor.execute('SELECT * FROM users')
+# print(cursor.fetchall())
 
 # uid = 2
 # cursor.execute("SELECT address from users where id = %s", [uid])
@@ -37,8 +43,8 @@ print(x.text)
 #     sid = store[0]
     
 
-
-    
+# cursor.execute("select * from users")
+# print(cursor.fetchall())    
 
 
 # import requests

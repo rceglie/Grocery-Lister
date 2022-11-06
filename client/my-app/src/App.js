@@ -10,6 +10,7 @@ import ChangeLocation from './components/ChangeLocation';
 import List from './components/List';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+import Arr from './components/Arr';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
               <Route path="/list" exact element={<List/>} />
               <Route path="/signin" exact element={<SignIn/>} />
               <Route path="/signup" exact element={<SignUp/>} />
+              <Route path="/listreload" exact element={<Arr />} />
           </Routes>
       </BrowserRouter>
   )

@@ -14,18 +14,37 @@ header {
   text-indent: 35px;;
   display: flex;
   flex-direction: row;
+  font-weight: bolder;
+}
 
- }
+header button {
+  height: 30px;
+  background: rgb(106, 140, 106);
+  border: 0;
+  color: rgba(0, 0, 0, 1);
+  border: 0;
+  opacity: 1;
+  font-family: 'Trebuchet MS', sans-serif;
+  border-radius: 10px;
+}
+
+header button:hover {
+  opacity: 1;
+  background-color: rgba(44, 108, 72, 0.521);
+  color: black;
+}
 
 .siteName {
-  width: 35%;
+  width: 83%;
   position: left;
   align-content: left;
+  color: rgb(7, 37, 7);
 }
 
 .shopList {
   width:10%;
   position: right;
+  margin-right: 5px;
 }
  .filter-container {
   width: 25%;
@@ -153,4 +172,12 @@ header {
     opacity: 1;
     background-color: rgba(44, 108, 72, 0.521);
     color: black;
+}
+
+.errMsg {
+  margin-top: 10px;
+  background-image: url(../../public/images/noresults.png);
+  background-size: 250px 250px;
+  height: 500px;
+  opacity: 0.75;
 }

@@ -1,13 +1,31 @@
-import React from 'react';
+import axios from 'axios';
+import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../style/item.css"
 
 const Item = ({data}) => {
 
     const navigate = useNavigate();
+    const [er, setEr] = useState("");
 
     const signOut = () => {
         console.log("hi")
+    }
+  
+    const addToList = () => {
+      axios.post('http://127.0.0.1:5000/add_to_list',
+      {
+        uid: localStorage.getItem("uid"),
+        pid: data[0]
+      }
+      ).then(function (response) {
+        console.log(response.data);
+        if (response.data != "error"){
+          setEr("")
+        } else {
+          setEr("Could not add to list.");
+        }
+      })
     }
 
   return (
@@ -27,7 +45,8 @@ const Item = ({data}) => {
           <p>{data[9]}</p>
         </div>
         <div className="addTo">
-          <button className="btn">Add to List</button>
+          <button className="btn" onClick={() => addToList()}>Add to List</button>
+          <p>{er}</p>
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ const Home = () => {
   const [results, setResults] = useState([]);
   const [range, setRange] = useState(5);
   const [errorMessage, setErrorMessage] = useState("");
+  const [list, setList] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -24,12 +25,11 @@ const Home = () => {
     if (exclude.length == 0) {
       exclude = [""]
     }
-
     axios.post('http://127.0.0.1:5000/searchquerylowest',
       {
         query: query.toLowerCase(),
         exclude: exclude,
-        range: range,
+        maxDistance: range,
         uid: JSON.parse(localStorage.getItem("uid"))
       }
       ).then(function (response) {
@@ -41,20 +41,44 @@ const Home = () => {
       })
   }
 
+  // const listClicked = () => {
+  //   axios.post('http://127.0.0.1:5000/get_list',
+  //     {
+  //       uid: JSON.parse(localStorage.getItem("uid"))
+  //     }
+  //     ).then(function (response) {
+  //       localStorage.setItem("list", response.data)
+  //       setList(response.data)
+  //     })
+  // }
+
   useEffect (() => {
     //console.log(stores)
     //<img src="../../../public/images/noresults.png"/>
   })
 
+  const userClicked = () => {
+    axios.post('http://127.0.0.1:5000/get_user',
+            {
+                uid: localStorage.getItem("uid")
+            }
+            ).then(function(response) {
+              console.log(response.data)
+              localStorage.setItem("user", response.data)
+              navigate("/user")
+            })
+  }
+
   return (
     <div className="body">
         <header>
           <div className = "siteName">
-            <h1>name</h1>
+            <h1>Grocery Lister</h1>
           </div>
           <div className="shopList">
             <button onClick={() => navigate("/list")}>My Shopping List</button>
           </div>
+          <button label="acctbtn" onClick={() => navigate("/user")}>My Account</button>
         </header>
 
         <div className="flex-container">
@@ -100,7 +124,7 @@ const Home = () => {
             <form className="search-bar" onSubmit={handleSubmit}> 
               <input type="text" id="query" value={query} name="q" placeholder="Search for a product"
                 onChange={(e) => setQuery(e.target.value)}/>
-              <button type="submit"><img src='../../public/images/search.png'/></button>
+              <button type="submit">GO</button>
             </form>
 
             <div>
@@ -109,7 +133,7 @@ const Home = () => {
                   <Item data={e} key={index}/>
                 );
               }) : 
-                  <div>
+                  <div className="errMsg">
                     <p>{errorMessage}</p>
                   </div>  
                 }

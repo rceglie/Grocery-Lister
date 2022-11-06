@@ -5,6 +5,7 @@ from flask import Blueprint, request, make_response, jsonify
 import json
 from flask_cors import cross_origin
 from geopy.distance import geodesic
+import requests
 
 
 bp = Blueprint('sql', __name__)
@@ -28,14 +29,16 @@ def searchquerylowest():
         
         cursor.execute("SELECT id, lat, lon FROM stores")
         storeLocations = cursor.fetchall()
-        farStores = []
+        farStores = [0]
         for store in storeLocations:
             sid = store[0]
             lat = store[1]
             lon = store[2]
             distance = geodesic(userLocation, (lat, lon)).miles
-            if distance > maxDistance: 
+            print(distance)
+            if distance > int(maxDistance): 
                 farStores.append(sid)
+        print(farStores)
         cursor.execute('''SELECT * FROM items, stores 
         WHERE sid = stores.id
         AND LOWER(items.name) LIKE %s 
@@ -45,9 +48,22 @@ def searchquerylowest():
         ("%" + data['query'] + "%", tuple(data['exclude']), tuple(farStores)))
 
         response = jsonify(cursor.fetchall())
+        print(response.data)
         return _corsify_actual_response(response)
 
-
+@bp.route('/get_list', methods=['POST', 'OPTIONS', 'GET'])
+def get_list():
+    response = make_response()
+    if request.method == 'OPTIONS':
+        return _build_cors_preflight_response()
+    elif request.method == 'POST':
+        data = json.loads(request.data)
+        cursor.execute('''SELECT * FROM list, items, stores
+        WHERE list.uid = %s
+        AND list.pid = items.id
+        AND items.sid = stores.id''', (data['uid'],))
+        response = jsonify(cursor.fetchall())
+        return _corsify_actual_response(response)
 
 @bp.route('/add_to_list', methods=['POST', 'OPTIONS', 'GET'])
 def add_to_list():
@@ -78,6 +94,19 @@ def remove_from_list():
         response.data = 'Item removed from list'
     conn.commit()
     return response
+
+@bp.route('/get_user', methods=['POST', 'OPTIONS', 'GET'])
+def get_user():
+    response = make_response()
+    if request.method == "OPTIONS": # CORS preflight
+        return _build_cors_preflight_response()
+    else:
+        data = json.loads(request.data)
+        cursor.execute("SELECT * FROM users WHERE id = %s", (data["uid"],))
+        response.data = cursor.fetchone()[0]
+        print(response.data)
+        return response
+
 
 @bp.route('/change_password', methods=['POST', 'OPTIONS', 'GET'])
 def change_password():
@@ -117,13 +146,40 @@ def sign_up():
         return _build_cors_preflight_response()
     else:
         data = json.loads(request.data)
-        cursor.execute("SELECT id FROM users WHERE username = %s AND password = %s", (data["username"],data["password"]))
+        cursor.execute("INSERT into users (name, username, password, address) values (%s, %s, %s, %s)", (data["name"],data["username"],data["password"],""))
+        conn.commit()
+        cursor.execute("Select id from users where username=%s AND password=%s", (data["username"], data["password"]))
         result = cursor.fetchone()
         if result == None:
             response.data = "error"
         else:
             response.data = str(result[0])
         return response
+
+@bp.route('/change_address', methods=['POST', 'OPTIONS', 'GET'])
+def change_address():
+    response = make_response()
+    if request.method == "OPTIONS": # CORS preflight
+        return _build_cors_preflight_response()
+    else:
+        data = json.loads(request.data)
+        address = data['street'] + ", " + data['city'] + ", " + data['state']
+        street = data['street'].replace(" ", "%20")
+        city = data['city'].replace(" ", "%20")
+        state = data['state'].replace(" ", "%20")
+        url = "https://api.geoapify.com/v1/geocode/search?text=" \
+            + street + "%2C%20" \
+            + city + "%2C%20" \
+            + state + "%2C%20United%20States%20of%20America&lang=en&limit=1&type=amenity&format=json&apiKey=1922d388abac4d2cbf326b05e1ec5449"
+        mapResponse = requests.get(url)
+        lon = mapResponse.json()["results"][0]["lon"]
+        lat = mapResponse.json()["results"][0]["lat"]
+        cursor.execute("UPDATE users SET address = %s, lat = %s, lon = %s WHERE id = %s", (address, lat, lon, data["uid"]))
+        conn.commit()
+        response.data = "true"
+        return response
+
+
 
 def _build_cors_preflight_response():
     response = make_response()

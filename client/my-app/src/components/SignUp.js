@@ -18,17 +18,16 @@ const SignUp = () => {
     if (password !== password2){
       setEr("Make sure passwords match");
     } else {
-      axios.post('http://127.0.0.1:5000/signup',
+      axios.post('http://127.0.0.1:5000/sign_up',
       {
         username: username,
         name: nname,
-        password: password,
-        location: "",
+        password: password
       }
       ).then(function (response) {
         console.log(response.data);
         if (response.data != "error"){
-          navigate("/setLocation")
+          navigate("/changeLocation")
         } else {
           setEr("Could not create account.");
         }

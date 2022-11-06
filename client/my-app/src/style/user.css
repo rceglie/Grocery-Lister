@@ -1,3 +1,59 @@
+#body {font-family: 'Trebuchet MS', sans-serif;}
 
+  .user-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
 
+  .user-wrapper button {
+    height: 50px;
+    justify-items: center;
+    background: rgba(1, 10, 1, 0.074);
+    border: none;
+    margin-left: 5px;
+    margin-top: 5px;
+    align-content: center;
+    opacity: 0.5;
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    align-content: left;
+  }
+
+  .user-wrapper button:hover {
+    opacity: 1;
+    background-color: rgba(44, 108, 72, 0.521);
+    color: black;
+}
+
+  .banner {
+    min-width: 40%;
+    min-height: 800px;
+    background-image: url(../../public/images/foodpatterns.jpeg);
+    background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+  }
+
+  .userInfo {
+    min-width: 55%;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav {
+    margin: 35px 50px 0px 0px;
+    align-items: right;
+  }
+
+  .nav button {
+    width: 100px;
+    height: 50px;
+    border-radius: 15px;
+  }
 
