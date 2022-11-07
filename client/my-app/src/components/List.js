@@ -6,61 +6,57 @@ import axios from 'axios';
 
 function List() {
     
-    const [results, setResults] = useState([]);
+    const [content, setContent] = useState([]);
     const navigate = useNavigate();
 
-    // const remove = (pid) => {
-    //     axios.post('http://127.0.0.1:5000/remove_from_list',
-    //         {
-    //             uid: localStorage.getItem("uid"),
-    //             pid: pid
-    //         }
-    //     ).then(() => {
-    //         navigate("/list")
-    //     })
-    // }
-    // const remove = () => {}
-    // const updateList = () => {}
-
-    // useEffect(() => {
-    //     axios
-    //         .post('http://127.0.0.1:5000/get_list', {uid: localStorage.getItem("uid")})
-    //         .then((res) => {
-    //             setResults(res.data)
-    //         })
-    // })
-
-    // const updateList = () => {
-    //     axios.post('http://127.0.0.1:5000/get_list',
-    //         {
-    //             uid: localStorage.getItem("uid")
-    //         }
-    //         ).then(function(response) {
-    //             setResults({"list": response.data}, function () {
-    //                 console.log(results)
-    //             })
-    //         })
-    // }
-
     useEffect(() => {
-        getData()
+        axios.post('http://127.0.0.1:5000/get_list',
+            {
+                uid: localStorage.getItem("uid")
+            }
+            ).then((res) => {
+                console.log(res)
+                setContent(res.data)
+            })
     }, [])
 
-    useEffect(() => {
-        console.log(results)
-    })
+    const remove1 = (pid) => {
+        console.log(pid)
+        let temp = content.slice()
+        let index = -1
+        temp.forEach((item, i) => {
+            if (item[1] == pid){
+                index = i
+            }
+        })
+        temp.splice(index, 1)
+        setContent(temp)
+    }
 
-    const getData = async() => {
-        const response = await axios.post('http://127.0.0.1:5000/get_list', {uid: 4})
-        setResults(await response.data)
+    const remove = (pid) => {
+        console.log("doing something")
+        axios.post('http://127.0.0.1:5000/remove_from_list',
+            {
+                uid: localStorage.getItem("uid"),
+                pid: pid
+            }
+        ).then(() => {
+            axios.post('http://127.0.0.1:5000/get_list',
+            {
+                uid: localStorage.getItem("uid")
+            }
+            ).then((res) => {
+                console.log(res)
+                setContent(res.data)
+            })
+        })
     }
 
     return (
         <div>
-            <p>{results}</p>
-            {results.map((e, index) => {
+            {content.map((e, index) => {
                 return (
-                    <p>{index}</p>
+                    <ListItem data={e} remove={remove} key={index}/>
                 );
               })
             }

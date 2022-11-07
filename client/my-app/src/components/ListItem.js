@@ -22,7 +22,7 @@ const ListItem = ({data, remove}) => {
           <p>{data[9]}</p>
         </div>
         <div className="addTo">
-          <button className="btn">Remove From List</button>
+          <button className="btn" onClick={() => remove(data[1])}>Remove From List</button>
         </div>
       </div>
     </div>
